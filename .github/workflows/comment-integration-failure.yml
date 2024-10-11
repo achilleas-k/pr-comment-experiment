@@ -18,7 +18,6 @@ on:
 jobs:
   on-failure:
     runs-on: ubuntu-latest
-
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: Add comment
@@ -29,6 +28,7 @@ jobs:
             The osbuild-composer integration workflow failed
 
   on-success:
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Add comment
