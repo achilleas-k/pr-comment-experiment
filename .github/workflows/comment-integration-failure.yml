@@ -23,7 +23,6 @@ jobs:
       - name: Add comment
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.SCHUTZBOT_GITHUB_ACCESS_TOKEN }}
           message: |
             The osbuild-composer integration workflow failed
 
@@ -34,6 +33,5 @@ jobs:
       - name: Add comment
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.SCHUTZBOT_GITHUB_ACCESS_TOKEN }}
           message: |
             The osbuild-composer integration workflow succeeded
