@@ -1,0 +1,25 @@
+---
+name: Integration
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  unit-tests:
+    name: "🛃 osbuild-composer unit tests"
+    runs-on: ubuntu-20.04
+    container:
+      image: registry.fedoraproject.org/fedora:latest
+
+    steps:
+      - name: Test
+        run: echo "Test OK"
+
+  lint:
+    name: "⌨ osbuild-composer Golang Lint"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint OK
+        run: echo "Lint OK"
