@@ -8,7 +8,7 @@ on:  # yamllint disable-line rule:truthy
 
 # Output storing based on https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/passing-information-between-jobs#example-defining-outputs-for-a-job
 jobs:
-  test:
+  test-job:
     name: "🛃 osbuild-composer unit tests"
     runs-on: ubuntu-20.04
     container:
@@ -16,24 +16,24 @@ jobs:
 
     # Map step output to job output
     outputs:
-      result: ${{ steps.test.outputs.result }}
+      result: ${{ steps.test-step.outputs.result }}
 
     steps:
       - name: Test
-        id: test
+        id: test-step
         run: echo result="Test OK" >> "$GITHUB_OUTPUT"
 
-  lint:
+  lint-job:
     name: "⌨ osbuild-composer Golang Lint"
     runs-on: ubuntu-latest
 
     # Map step output to job output
     outputs:
-      result: ${{ steps.lint.outputs.result }}
+      result: ${{ steps.lint-step.outputs.result }}
 
     steps:
       - name: Lint OK
-        id: lint
+        id: lint-step
         run: echo result="Lint OK" >> "$GITHUB_OUTPUT"
 
   upload:
@@ -49,8 +49,8 @@ jobs:
           echo "$pr_number" > ./results/pr
       - name: Save test and lint results
         env:
-          test_result: ${{ needs.test.outputs.result }}
-          lint_result: ${{ needs.lint.outputs.result }}
+          test_result: ${{ needs.test-job.outputs.result }}
+          lint_result: ${{ needs.lint-job.outputs.result }}
         run: |
           mkdir -p ./results
 
