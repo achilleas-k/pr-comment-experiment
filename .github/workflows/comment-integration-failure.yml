@@ -62,11 +62,11 @@ jobs:
             let pr_number = Number(fs.readFileSync('./pr'));
             core.setOutput("pr_number", pr_number);
 
-            let test_result = fs.readFileSync('./test');
+            let test_result = String(fs.readFileSync('./test'));
             core.info("test result is " + test_result);
             core.setOutput("test_result", test_result);
 
-            let lint_result = fs.readFileSync('./lint');
+            let lint_result = String(fs.readFileSync('./lint'));
             core.info("lint result is " + lint_result);
             core.setOutput("lint_result", lint_result);
 
