@@ -37,8 +37,8 @@ jobs:
           echo "$PR_NUMBER" > ./results/pr
       - name: Save test and lint results
         env:
-          test_result: ${{needs.test.outputs}}
-          lint_result: ${{needs.lint.outputs}}
+          test_result: ${{ needs.test.outputs }}
+          lint_result: ${{ needs.lint.outputs }}
         run: |
           mkdir -p ./results
           echo "$test_result" > ./results/test
