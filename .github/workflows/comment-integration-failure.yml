@@ -69,7 +69,7 @@ jobs:
       - name: Add comment
         uses: mshick/add-pr-comment@v2
         with:
-          issue: 1
+          issue: ${{ env.issue_number }}
           message: |
             Results:
               - Test: $test_result
