@@ -56,9 +56,11 @@ jobs:
             core.exportVariable("pr_number", issue_number)
 
             let test_result = fs.readFileSync('./test')
+            core.info("test result is " + test_result)
             core.exportVariable("test_result", test_result)
 
             let lint_result = fs.readFileSync('./lint')
+            core.info("lint result is " + lint_result)
             core.exportVariable("lint_result", lint_result)
 
   post-results:
