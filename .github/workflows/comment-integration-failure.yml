@@ -23,8 +23,8 @@ jobs:
     # Map step outputs to job output
     outputs:
       pr_number: ${{ steps.read-results.outputs.pr_number }}
-      test_resuilt: ${{ steps.read-results.outputs.test_result }}
-      lint_resuilt: ${{ steps.read-results.outputs.lint_result }}
+      test_result: ${{ steps.read-results.outputs.test_result }}
+      lint_result: ${{ steps.read-results.outputs.lint_result }}
 
     steps:
       - name: 'Download artifact'
