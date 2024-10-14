@@ -20,6 +20,12 @@ on:
 jobs:
   download-results:
     runs-on: ubuntu-latest
+    # Map step outputs to job output
+    outputs:
+      pr_number: ${{ steps.read-results.outputs.pr_number }}
+      test_resuilt: ${{ steps.read-results.outputs.test_result }}
+      lint_resuilt: ${{ steps.read-results.outputs.lint_result }}
+
     steps:
       - name: 'Download artifact'
         uses: actions/github-script@v6
@@ -47,21 +53,22 @@ jobs:
 
       - name: 'Read results'
         uses: actions/github-script@v6
+        id: read-results
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             let fs = require('fs');
 
             let issue_number = Number(fs.readFileSync('./pr'));
-            core.exportVariable("pr_number", issue_number)
+            core.setOutput('pr_number", issue_number"')
 
             let test_result = fs.readFileSync('./test')
             core.info("test result is " + test_result)
-            core.exportVariable("test_result", test_result)
+            core.setOutput("test_result", test_result)
 
             let lint_result = fs.readFileSync('./lint')
             core.info("lint result is " + lint_result)
-            core.exportVariable("lint_result", lint_result)
+            core.setOutput("lint_result", lint_result)
 
   post-results:
     permissions:
@@ -71,8 +78,12 @@ jobs:
     steps:
       - name: Add comment
         uses: mshick/add-pr-comment@v2
+        env:
+          pr_number: ${{ needs.download-results.outputs.pr_number }}
+          test_result: ${{ needs.download-results.outputs.test_result }}
+          lint_result: ${{ needs.download-results.outputs.lint_result }}
         with:
-          issue: ${{ env.issue_number }}
+          issue: ${{ env.pr_number }}
           message: |
             Results:
               - Test: $test_result
