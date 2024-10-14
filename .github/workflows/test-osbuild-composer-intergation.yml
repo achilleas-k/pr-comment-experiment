@@ -31,16 +31,21 @@ jobs:
     steps:
       - name: Save PR number
         env:
-          PR_NUMBER: ${{ github.event.number }}
+          pr_number: ${{ github.event.number }}
         run: |
           mkdir -p ./results
-          echo "$PR_NUMBER" > ./results/pr
+          echo "$pr_number"
+          echo "$pr_number" > ./results/pr
       - name: Save test and lint results
         env:
           test_result: ${{ needs.test.outputs }}
           lint_result: ${{ needs.lint.outputs }}
         run: |
           mkdir -p ./results
+
+          echo "$test_result"
+          echo "$lint_result"
+
           echo "$test_result" > ./results/test
           echo "$lint_result" > ./results/lint
       - uses: actions/upload-artifact@v4
