@@ -60,15 +60,15 @@ jobs:
             let fs = require('fs');
 
             let issue_number = Number(fs.readFileSync('./pr'));
-            core.setOutput('pr_number", issue_number"')
+            core.setOutput('pr_number", issue_number"');
 
-            let test_result = fs.readFileSync('./test')
-            core.info("test result is " + test_result)
-            core.setOutput("test_result", test_result)
+            let test_result = fs.readFileSync('./test');
+            core.info("test result is " + test_result);
+            core.setOutput("test_result", test_result);
 
-            let lint_result = fs.readFileSync('./lint')
-            core.info("lint result is " + lint_result)
-            core.setOutput("lint_result", lint_result)
+            let lint_result = fs.readFileSync('./lint');
+            core.info("lint result is " + lint_result);
+            core.setOutput("lint_result", lint_result);
 
   post-results:
     permissions:
