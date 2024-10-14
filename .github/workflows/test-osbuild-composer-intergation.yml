@@ -39,6 +39,9 @@ jobs:
   upload:
     # Based on https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#using-data-from-the-triggering-workflow
     runs-on: ubuntu-latest
+    needs:
+      - test-job
+      - lint-job
     steps:
       - name: Save PR number
         env:
