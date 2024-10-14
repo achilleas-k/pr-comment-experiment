@@ -61,7 +61,9 @@ jobs:
             let lint_result = fs.readFileSync('./lint')
             core.exportVariable("lint_result", lint_result)
 
-  on-success:
+  post-results:
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Add comment
