@@ -16,14 +16,14 @@ jobs:
 
     steps:
       - name: Test
-        run: echo "Test OK" > "$GITHUB_OUTPUT"
+        run: echo result="Test OK" > "$GITHUB_OUTPUT"
 
   lint:
     name: "⌨ osbuild-composer Golang Lint"
     runs-on: ubuntu-latest
     steps:
       - name: Lint OK
-        run: echo "Lint OK" > "$GITHUB_OUTPUT"
+        run: echo result="Lint OK" > "$GITHUB_OUTPUT"
 
   upload:
     # Based on https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#using-data-from-the-triggering-workflow
